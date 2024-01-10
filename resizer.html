@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Resizer</title>
+    <style>
+        body{
+            font-family: sans-serif;
+            background-color: rgb(213, 213, 211);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding:10px;
+        }
+        h1{
+            color: rgb(61, 60, 60);
+        }
+        input[type="file"]{
+            display: none;
+        }
+        label.file-input-label{
+            background-color: rgb(105, 134, 238);
+            color:white;
+            padding:10px 20px;
+            cursor: pointer;
+            border-radius: 5%;
+        }
+        
+        label.file-input-label:hover{
+            background-color:rgb(83, 116, 236); ;
+        }
+        
+        input, button, canvas{
+            margin: 0.7rem;
+        }
+
+        button{
+            padding:10px 20px;
+            border: none;
+            border-radius: 5%;
+            background-color: rgb(238, 91, 113);
+            color:white;
+            cursor: pointer;
+
+        }
+        button:hover{
+            background-color: rgb(248, 80, 105);
+        }
+
+        #width-input{
+            padding:0.5rem;
+            border: none;
+            border-radius: 5%;
+        }
+       p{
+        font-size: 0.7rem;
+       }
+    </style>
+</head>
+<body>
+    <h1>Image Resizer</h1>
+    <input type="file" id="image-input" name="image" accept="image/*" />
+    <label for="image-input" class="file-input-label">Choose Image</label>
+    <p id="is-file-added">No file added.</p>
+    <br/>
+    <label for="width-input">Enter Desired Width:</label>
+    <input type="number" id="width-input" placeholder="Enter Width"/>
+
+    <br/>
+    <button id="resize-btn">Resize Image</button>
+    <p>If you do not specify a width; the image size will be set to 16px.</p>
+    <canvas id="canvas" style="display:none;"></canvas>
+
+
+    <script>
+        const input = document.getElementById("image-input");
+        function resizeImage(){
+            const canvas = document.getElementById("canvas");
+            const widthInput = document.getElementById("width-input");
+            const ctx = canvas.getContext("2d");
+            
+            const desiredWidth = parseInt(widthInput.value)|| 16;
+            image = new Image();
+            image.src = URL.createObjectURL(input.files[0]);
+            image.onload = function(){
+                canvas.width = desiredWidth;
+                canvas.height = image.height*desiredWidth/image.width;
+            ctx.drawImage(image, 0, 0, desiredWidth, image.height*desiredWidth/image.width);
+            canvas.style.display = "block";
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function(){
+            const resizeBtn = document.getElementById("resize-btn");
+            resizeBtn.addEventListener("click", resizeImage);
+            input.addEventListener("change", function(){
+                const isFileAdded = document.getElementById("is-file-added");
+                if(input.files && input.files.length>0){
+                    isFileAdded.textContent = input.files[0].name;
+                }
+                else{
+                    isFileAdded.textContent = "No file added.";
+
+                }
+            })
+        })
+        
+    </script>
+</body>
+
+</html>
