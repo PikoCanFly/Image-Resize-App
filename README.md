@@ -1,6 +1,6 @@
 # Image Resizer App
 
-![Image Resizer App Logo](url_to_your_logo.png)
+
 
 ## Overview
 
