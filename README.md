@@ -16,5 +16,4 @@ Check out the live demo of the Image Resizer App [here](https://fascinating-bego
 - Choose the desired width for your images.
 - Improved UI & UX for a seamless user experience.
 
-## Watch Live Coding Journey + Tutorial on YT:
-[![Image Resizing App Tutorial](https://img.youtube.com/vi/L0nQkI5blW8/0.jpg)](https://www.youtube.com/watch?v=L0nQkI5blW)
+
